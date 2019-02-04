@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-# #используем псевдокомментарий чтобы можно было использовать не латинские символы
+# используем псевдокомментарий чтобы можно было использовать не латинские символы
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
 import unittest
 from group import Group
 
