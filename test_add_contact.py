@@ -12,20 +12,22 @@ class test_add_contact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstname="FirstName1", lastname="LastName1"))
+        self.fill_contact_form(wd, Contact(firstname="FirstName1", lastname="LastName1"))
+        self.submit_contact(wd)
         self.logout(wd)
 
     def test_add_empty_contact(self):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstname="", lastname=""))
+        self.fill_contact_form(wd, Contact(firstname="", lastname=""))
+        self.submit_contact(wd)
         self.logout(wd)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def create_contact(self, wd, contact):
+    def fill_contact_form(self, wd, contact):
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         # fill new contact form
@@ -35,6 +37,8 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
         wd.find_element_by_name("lastname").send_keys(contact.lastname)
+
+    def submit_contact(self, wd):
         # submit new contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
@@ -52,6 +56,7 @@ class test_add_contact(unittest.TestCase):
 
     def tearDown(self):
         self.wd.quit()
+
 
 if __name__ == "__main__":
     unittest.main()
