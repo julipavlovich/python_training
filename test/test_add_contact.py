@@ -12,12 +12,12 @@ def app(request):
 
     
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.add_contact(Contact(firstname="FirstName1", lastname="LastName1"))
-    app.logout()
+    app.session.logout()
 
 
 def test_add_empty_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.add_contact(Contact(firstname="", lastname=""))
-    app.logout()
+    app.session.logout()

@@ -1,4 +1,5 @@
 from selenium import webdriver
+from fixture.session import SessionHelper
 
 
 class Application:
@@ -6,10 +7,7 @@ class Application:
     def __init__(self):
         self.wd = webdriver.Firefox()  # передали ссылку на драйвер
         self.wd.implicitly_wait(30)
-
-    def logout(self):
-        wd = self.wd  # извлекли ссылку на драйвер
-        wd.find_element_by_link_text("Logout").click()
+        self.session = SessionHelper(self)
 
     def return_to_groups_page(self):
         wd = self.wd  # извлекли ссылку на драйвер
@@ -38,21 +36,13 @@ class Application:
         wd = self.wd  # извлекли ссылку на драйвер
         wd.find_element_by_link_text("groups").click()
 
-    def login(self, username, password):
-        wd = self.wd  # извлекли ссылку на драйвер
-        self.open_home_page()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
-
     def open_home_page(self):
         wd = self.wd  # извлекли ссылку на драйвер
         wd.get("http://localhost/addressbook/index.php")
 
     def destroy(self):  # разрушаем фикстуру
         self.wd.quit()
+
     def add_contact(self, contact):
         wd = self.wd
         # init new contact creation
