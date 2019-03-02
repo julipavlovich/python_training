@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abf82dbc-4d29-4fc9-967c-70cc9a0035d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_add_contact.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_add_contact.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_add_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_add_group.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +18,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_add_group.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-150">
-              <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+            <state relative-caret-position="360">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              <folding>
+                <element signature="e#107#122#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -25,11 +30,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_add_contact.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="45" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+            <state relative-caret-position="345">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
-                <element signature="e#24#54#0" expanded="true" />
+                <element signature="e#25#40#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="452">
+              <caret line="72" selection-start-line="72" selection-end-line="72" />
             </state>
           </provider>
         </entry>
@@ -69,22 +83,24 @@
       <list>
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/group.py" />
-        <option value="$PROJECT_DIR$/test_add_group.py" />
         <option value="$PROJECT_DIR$/contact.py" />
+        <option value="$PROJECT_DIR$/application.py" />
+        <option value="$PROJECT_DIR$/test_add_group.py" />
         <option value="$PROJECT_DIR$/test_add_contact.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="813" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="722" />
+    <option name="width" value="718" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -100,7 +116,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,51 +245,58 @@
       <option name="project" value="LOCAL" />
       <updated>1549147533374</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Small improvements for code readability">
+      <created>1550533324030</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1550533324031</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_in_test_add_group_py - 2019.02.04 at 23h 58m 50s.xml">
-      <configuration name="pytest in test_add_group.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.05 at 00h 00m 00s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 36m 18s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.05 at 00h 09m 40s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 40m 39s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.05 at 00h 15m 40s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 46m 57s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.05 at 00h 15m 55s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 48m 20s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 00m 41s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 49m 30s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 01m 55s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 49m 45s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 03m 34s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.03.02 at 18h 47m 23s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 05m 03s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.03.02 at 18h 51m 20s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_test_add_contact_py - 2019.02.19 at 02h 05m 21s.xml">
+    <history-entry file="pytest_in_test_add_contact_py - 2019.03.02 at 18h 54m 45s.xml">
+      <configuration name="pytest in test_add_contact.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_add_contact_py - 2019.03.02 at 19h 06m 30s.xml">
       <configuration name="pytest in test_add_contact.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="813" extended-state="0" />
+    <frame x="722" y="0" width="718" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14164905" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16642755" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4785021" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.056865465" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.29036143" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -293,7 +315,8 @@
     <MESSAGE value="The first test &quot;Add new group&quot; was added (exported from the Katalon) and modified" />
     <MESSAGE value="The first test &quot;Add new group&quot; was added (exported from the Katalon) and modified&#10;Last small changes and env set up" />
     <MESSAGE value="Creating auxiliary methods, improving the &quot;readability&quot; of the code, adding comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating auxiliary methods, improving the &quot;readability&quot; of the code, adding comments" />
+    <MESSAGE value="Small improvements for code readability" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small improvements for code readability" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -327,19 +350,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_add_group.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state relative-caret-position="360">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#107#122#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_add_contact.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="45" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        <state relative-caret-position="345">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
           <folding>
-            <element signature="e#24#54#0" expanded="true" />
+            <element signature="e#25#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
