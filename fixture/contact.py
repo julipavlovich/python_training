@@ -22,6 +22,10 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
+    def open_home_page(self):
+        wd = self.app.wd  # извлекли ссылку на драйвер
+        wd.find_element_by_link_text("home").click()
+
     def submit(self):
         wd = self.app.wd
         # submit new contact creation
@@ -29,6 +33,7 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.open_home_page()
         self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
@@ -39,12 +44,14 @@ class ContactHelper:
 
     def cancel_delete_first_contact(self):
         wd = self.app.wd
+        self.open_home_page()
         self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().dismiss()
 
     def modify_first_contact(self, contact):
         wd = self.app.wd
+        self.open_home_page()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.fill_contact_form(contact)
         wd.find_element_by_name("update").click()
