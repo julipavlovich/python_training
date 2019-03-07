@@ -5,10 +5,12 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        self.open_home_page()
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         self.fill_contact_form(contact)
         self.submit()
+        self.return_to_home_page()
 
     def fill_contact_form(self, contact):
         self.change_field_value("firstname", contact.firstname)
@@ -21,9 +23,14 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
+    def return_to_home_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home page").click()
+
     def open_home_page(self):
         wd = self.app.wd  # извлекли ссылку на драйвер
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("/index.php") and len(wd.find_elements_by_name("searchstring")) > 0):
+            self.app.open_home_page()
 
     def submit(self):
         wd = self.app.wd
@@ -36,17 +43,19 @@ class ContactHelper:
         self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
+        self.open_home_page()
 
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
-    def cancel_delete_first_contact(self):
+    def cancel_delete_first_contact(self):  # доработать
         wd = self.app.wd
         self.open_home_page()
         self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().dismiss()
+        self.open_home_page()
 
     def modify_first_contact(self, contact):
         wd = self.app.wd

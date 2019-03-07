@@ -1,0 +1,55 @@
+Index: fixture/application.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from selenium import webdriver\nfrom fixture.session import SessionHelper\nfrom fixture.group import GroupHelper\nfrom fixture.contact import ContactHelper\n\n\nclass Application:\n\n    def __init__(self):\n        self.wd = webdriver.Firefox()  # передали ссылку на драйвер\n        self.wd.implicitly_wait(5)\n        self.session = SessionHelper(self)\n        self.group = GroupHelper(self)\n        self.contact = ContactHelper(self)\n\n    def open_home_page(self):\n        wd = self.wd  # извлекли ссылку на драйвер\n        wd.get(\"http://localhost/addressbook/index.php\")\n\n    def destroy(self):  # разрушаем фикстуру\n        self.wd.quit()\n\n    def is_valid(self):\n        try:\n            self.wd.current_url\n            return True\n        except:\n            return False\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- fixture/application.py	(revision b6eea03c90612b9eff8f61a4b6d555b05d74e65c)
++++ fixture/application.py	(date 1551911258000)
+@@ -8,7 +8,7 @@
+ 
+     def __init__(self):
+         self.wd = webdriver.Firefox()  # передали ссылку на драйвер
+-        self.wd.implicitly_wait(5)
++        self.wd.implicitly_wait(5)  # уже не имеет смысла и можно удалить
+         self.session = SessionHelper(self)
+         self.group = GroupHelper(self)
+         self.contact = ContactHelper(self)
+Index: fixture/contact.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class ContactHelper:\n\n    def __init__(self, app):\n        self.app = app\n\n    def create(self, contact):\n        wd = self.app.wd\n        # init new contact creation\n        wd.find_element_by_link_text(\"add new\").click()\n        self.fill_contact_form(contact)\n        self.submit()\n\n    def fill_contact_form(self, contact):\n        self.change_field_value(\"firstname\", contact.firstname)\n        self.change_field_value(\"lastname\", contact.lastname)\n\n    def change_field_value(self, field_name, text):\n        wd = self.app.wd\n        if text is not None:\n            wd.find_element_by_name(field_name).click()\n            wd.find_element_by_name(field_name).clear()\n            wd.find_element_by_name(field_name).send_keys(text)\n\n    def open_home_page(self):\n        wd = self.app.wd  # извлекли ссылку на драйвер\n        wd.find_element_by_link_text(\"home\").click()\n\n    def submit(self):\n        wd = self.app.wd\n        # submit new contact creation\n        wd.find_element_by_xpath(\"(//input[@name='submit'])[2]\").click()\n\n    def delete_first_contact(self):\n        wd = self.app.wd\n        self.open_home_page()\n        self.select_first_contact()\n        wd.find_element_by_xpath(\"//input[@value='Delete']\").click()\n        wd.switch_to_alert().accept()\n\n    def select_first_contact(self):\n        wd = self.app.wd\n        wd.find_element_by_name(\"selected[]\").click()\n\n    def cancel_delete_first_contact(self):\n        wd = self.app.wd\n        self.open_home_page()\n        self.select_first_contact()\n        wd.find_element_by_xpath(\"//input[@value='Delete']\").click()\n        wd.switch_to_alert().dismiss()\n\n    def modify_first_contact(self, contact):\n        wd = self.app.wd\n        self.open_home_page()\n        wd.find_element_by_xpath(\"//img[@alt='Edit']\").click()\n        self.fill_contact_form(contact)\n        wd.find_element_by_name(\"update\").click()\n        wd.find_element_by_link_text(\"home page\").click()\n\n    def count(self):\n        wd = self.app.wd\n        self.open_home_page()\n        return len(wd.find_elements_by_name(\"selected[]\"))\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- fixture/contact.py	(revision b6eea03c90612b9eff8f61a4b6d555b05d74e65c)
++++ fixture/contact.py	(date 1551910077000)
+@@ -23,7 +23,8 @@
+ 
+     def open_home_page(self):
+         wd = self.app.wd  # извлекли ссылку на драйвер
+-        wd.find_element_by_link_text("home").click()
++        if not wd.current_url.endswith("/index.php") and len(wd.find_elements_by_name("searchstring")) > 0:
++            wd.find_element_by_link_text("home").click()
+ 
+     def submit(self):
+         wd = self.app.wd
+Index: fixture/group.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class GroupHelper:\n\n    def __init__(self, app):\n        self.app = app\n\n    def return_to_groups_page(self):\n        wd = self.app.wd  # извлекли ссылку на драйвер\n        wd.find_element_by_link_text(\"group page\").click()\n\n    def create(self, group):\n        wd = self.app.wd  # извлекли ссылку на драйвер\n        self.open_groups_page()\n        # init group creation\n        wd.find_element_by_name(\"new\").click()\n        self.fill_group_form(group)\n        # submit group creation\n        wd.find_element_by_name(\"submit\").click()\n        self.return_to_groups_page()\n\n    def fill_group_form(self, group):\n        wd = self.app.wd\n        self.change_field_value(\"group_name\", group.name)\n        self.change_field_value(\"group_header\", group.header)\n        self.change_field_value(\"group_footer\", group.footer)\n\n    def change_field_value(self, field_name, text):\n        wd = self.app.wd\n        if text is not None:\n            wd.find_element_by_name(field_name).click()\n            wd.find_element_by_name(field_name).clear()\n            wd.find_element_by_name(field_name).send_keys(text)\n\n    def open_groups_page(self):\n        wd = self.app.wd  # извлекли ссылку на драйвер\n        wd.find_element_by_link_text(\"groups\").click()\n\n    def delete_first_group(self):\n        wd = self.app.wd  # извлекли ссылку на драйвер\n        self.open_groups_page()\n        self.select_first_group()\n        # submit deletion\n        wd.find_element_by_name(\"delete\").click()\n        self.return_to_groups_page()\n\n    def select_first_group(self):\n        wd = self.app.wd\n        wd.find_element_by_name(\"selected[]\").click()\n\n    def modify_first_group(self, new_group_data):\n        wd = self.app.wd  # извлекли ссылку на драйвер\n        self.open_groups_page()\n        self.select_first_group()\n        # click edit button\n        wd.find_element_by_name(\"edit\").click()\n        self.fill_group_form(new_group_data)\n        # submit changes\n        wd.find_element_by_name(\"update\").click()\n        self.return_to_groups_page()\n\n    def count(self):\n        wd = self.app.wd\n        self.open_groups_page()\n        return len(wd.find_elements_by_name(\"selected[]\"))\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- fixture/group.py	(revision b6eea03c90612b9eff8f61a4b6d555b05d74e65c)
++++ fixture/group.py	(date 1551911357000)
+@@ -32,6 +32,8 @@
+ 
+     def open_groups_page(self):
+         wd = self.app.wd  # извлекли ссылку на драйвер
++        if wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new"))> 0:
++            return
+         wd.find_element_by_link_text("groups").click()
+ 
+     def delete_first_group(self):

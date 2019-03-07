@@ -8,14 +8,15 @@ class Application:
 
     def __init__(self):
         self.wd = webdriver.Firefox()  # передали ссылку на драйвер
-        self.wd.implicitly_wait(5)
+        # self.wd.implicitly_wait(5)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
 
     def open_home_page(self):
         wd = self.wd  # извлекли ссылку на драйвер
-        wd.get("http://localhost/addressbook/index.php")
+        if not (wd.current_url.endswith("/index.php") and len(wd.find_elements_by_name("searchstring")) > 0):
+            wd.get("http://localhost/addressbook/index.php")
 
     def destroy(self):  # разрушаем фикстуру
         self.wd.quit()

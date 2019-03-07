@@ -13,8 +13,9 @@ class SessionHelper:
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def logout(self):
-        wd = self.app.wd  # извлекли ссылку на драйвер
+        wd = self.app.wd
         wd.find_element_by_link_text("Logout").click()
+        wd.implicitly_wait(3)
         wd.find_element_by_name("user")
 
     def ensure_logout(self):
@@ -26,7 +27,6 @@ class SessionHelper:
         return len(wd.find_elements_by_link_text("Logout")) > 0
 
     def ensure_login(self, username, password):
-        wd = self.app.wd
         if self.is_logged_in():
             if self.is_logged_in_as(username):
                 #  вышли из метода
