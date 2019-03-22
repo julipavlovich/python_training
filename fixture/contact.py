@@ -1,5 +1,4 @@
 from model.contact import Contact
-import re
 
 
 class ContactHelper:
@@ -15,6 +14,7 @@ class ContactHelper:
         self.fill_contact_form(contact)
         self.submit()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def fill_contact_form(self, contact):
         self.change_field_value("firstname", contact.firstname)
@@ -49,6 +49,7 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         wd.find_elements_by_css_selector("div.msgbox")
         self.open_home_page()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -69,23 +70,27 @@ class ContactHelper:
         self.fill_contact_form(contact)
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("home page").click()
+        self.contact_cache = None
 
     def count(self):
         wd = self.app.wd
         self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_home_page()
-        contacts = []
-        for element in wd.find_elements_by_css_selector("tr[name='entry']"):
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            cells = element.find_elements_by_tag_name("td")
-            f_name = cells[2].text
-            l_name = cells[1].text
-            contacts.append(Contact(id=id, lastname=l_name, firstname=f_name))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_css_selector("tr[name='entry']"):
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                cells = element.find_elements_by_tag_name("td")
+                f_name = cells[2].text
+                l_name = cells[1].text
+                self.contact_cache.append(Contact(id=id, lastname=l_name, firstname=f_name))
+        return list(self.contact_cache)
 
         # for row in wd.find_elements_by_css_selector("tr[name='entry']"):
         #    cells = row.find_elements_by_css_selector('td')
