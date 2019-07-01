@@ -47,7 +47,8 @@ class ContactHelper:
         self.select_contact_by_index(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
-        wd.find_elements_by_css_selector("div.msgbox")
+        wd.implicitly_wait(5)  # поставить ожидание на элемент а не весь тест
+        wd.find_element_by_css_selector("div.msgbox")
         self.open_home_page()
         self.contact_cache = None
 
@@ -90,6 +91,7 @@ class ContactHelper:
     def count(self):
         wd = self.app.wd
         self.open_home_page()
+        wd.find_element_by_css_selector("strong")
         return len(wd.find_elements_by_name("selected[]"))
 
     contact_cache = None
