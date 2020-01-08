@@ -108,7 +108,8 @@ class ContactHelper:
                 f_name = cells[2].text
                 l_name = cells[1].text
                 all_phones = cells[5].text
-                self.contact_cache.append(Contact(id=id, all_phones_from_home_page=all_phones, lastname=l_name, firstname=f_name))
+                address = cells[3].text
+                self.contact_cache.append(Contact(id=id, all_phones_from_home_page=all_phones, lastname=l_name, firstname=f_name, address=address))
         return list(self.contact_cache)
 
         # for row in wd.find_elements_by_css_selector("tr[name='entry']"):
@@ -141,7 +142,8 @@ class ContactHelper:
         workphone = wd.find_element_by_name("work").get_attribute("value")
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
-        return Contact(firstname=firstname, lastname=lastname, id=id, homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondaryphone=secondaryphone)
+        address = wd.find_element_by_name("address").get_attribute("value")
+        return Contact(firstname=firstname, lastname=lastname, id=id, homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondaryphone=secondaryphone, address=address)
 
     def open_contact_view_by_index(self, index):
         wd = self.app.wd
