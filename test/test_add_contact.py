@@ -10,11 +10,11 @@ def random_string(prefix, maxlen):
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-testdata = [
-    Contact(firstname=firstname, lastname=lastname)
-    for firstname in ["", random_string("fname", 20)]
-    for lastname in ["", random_string("lname", 20)]
+testdata = [Contact(firstname="", lastname="")] + [
+    Contact(firstname=random_string("fname", 10), lastname=random_string("lname", 10))
+    for i in range(5)
 ]
+
 
 @pytest.mark.parametrize("contact", testdata, ids=[repr(x) for x in testdata])
 def test_add_contact(app, contact):
