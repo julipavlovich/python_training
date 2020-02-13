@@ -53,12 +53,27 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        wd.implicitly_wait(5)  # поставить ожидание на элемент а не весь тест
+        wd.find_element_by_css_selector("div.msgbox")
+        self.open_home_page()
+        self.contact_cache = None
+
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
     def select_first_contact(self):
         self.select_contact_by_index(0)
@@ -75,6 +90,15 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+        self.fill_contact_form(contact)
+        wd.find_element_by_name("update").click()
+        wd.find_element_by_link_text("home page").click()
+        self.contact_cache = None
+
+    def modify_contact_by_id(self, id, contact):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_css_selector(f"a[href='edit.php?id={id}']").click()
         self.fill_contact_form(contact)
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("home page").click()
