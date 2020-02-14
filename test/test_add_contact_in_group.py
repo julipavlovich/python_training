@@ -1,7 +1,6 @@
 from model.contact import Contact
 from model.group import Group
 import random
-from fixture.orm import ORMFixture
 
 
 def test_add_contact_in_group(app, db):

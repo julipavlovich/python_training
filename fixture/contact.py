@@ -201,3 +201,18 @@ class ContactHelper:
         wd.find_element_by_css_selector("select[name='to_group'] option[value='%s']" % group_id).click()
         wd.find_element_by_name("add").click()
         wd.find_element_by_partial_link_text("group page").click()
+
+    def del_contact_in_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_css_selector("option[value='%s']" % group_id).click()
+        self.select_contact_by_id(contact_id)
+        wd.find_element_by_name("remove").click()
+        self.app.open_home_page()
+
+    def get_contacts_from_group(self, group_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_css_selector("[name=group]").click()
+        wd.find_element_by_css_selector("select[name='group'] option[value='%s']" % group_id).click()
+        self.get_contact_list()
