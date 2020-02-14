@@ -38,3 +38,28 @@ class DbFixture:
 
     def destroy(self):
         self.connection.close()
+
+    def get_contacts_not_in_group(self, group_id):
+        list = []
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute(
+            "select ab.id from addressbook ab LEFT JOIN address_in_groups ag on ab.id = ag.id where ab.deprecated='0000-00-00 00:00:00'and ag.group_id is NULL")
+            return cursor.fetchall()
+        finally:
+            cursor.close()
+
+    def get_contacts_in_group(self, group_id):
+        cursor = self.connection.cursor()
+        list = []
+        try:
+            cursor.execute(
+                "select id, group_id from address_in_groups where group_id=%s",
+                (int(group_id))
+            )
+            return cursor.fetchall()
+            # row = cursor.fetchone()
+            # list.append(row)
+        finally:
+            cursor.close()
+        # return list

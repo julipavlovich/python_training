@@ -187,3 +187,17 @@ class ContactHelper:
         mobilephone = re.search("M: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondaryphone=secondaryphone)
+
+    def select_group(self, group_id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("[name=to_group]").click()
+        wd.find_element_by_xpath("//option[@value = %s]" % group_id).click()
+
+    def add_contact_in_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(contact_id)
+        wd.find_element_by_css_selector("[name=to_group]").click()
+        wd.find_element_by_css_selector("select[name='to_group'] option[value='%s']" % group_id).click()
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_partial_link_text("group page").click()
