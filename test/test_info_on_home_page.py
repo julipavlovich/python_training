@@ -59,11 +59,10 @@ def test_contacts_info_on_home_page_vs_db(app, db, check_ui):
     index = 0
     while index <= int((len(contact_info_ui) - 1)):
         contact = contact_info_db[index]
-        if check_ui:
-            assert contact_info_ui[index].firstname == contact_info_db[index].firstname
-            assert contact_info_ui[index].lastname == contact_info_db[index].lastname
-            assert contact_info_ui[index].address == contact_info_db[index].address
-            assert contact_info_ui[index].all_phones_from_home_page == merge_phones_like_on_home_page(contact)
-            assert contact_info_ui[index].all_emails_from_home_page == merge_emails_like_on_home_page(contact)
+        assert contact_info_ui[index].firstname == contact_info_db[index].firstname
+        assert contact_info_ui[index].lastname == contact_info_db[index].lastname
+        assert contact_info_ui[index].address == contact_info_db[index].address
+        assert contact_info_ui[index].all_phones_from_home_page == merge_phones_like_on_home_page(contact)
+        assert contact_info_ui[index].all_emails_from_home_page == merge_emails_like_on_home_page(contact)
         index = index + 1
     print(index)
