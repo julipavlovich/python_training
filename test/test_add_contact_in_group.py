@@ -14,6 +14,8 @@ def test_add_contact_in_group(app, db):
     random_group_db_id = int(random_group.id)
     # выбрать контакт, случайно, не состоит в группе
     contacts_not_in_group = db.get_contacts_not_in_group(random_group_db_id)
+    if len(contacts_not_in_group) == 0:
+        app.contact.create(Contact(firstname="ADDNewFirstName1", lastname="ADDNewLastName1"))
     random_contact = random.choice(contacts_not_in_group)
     random_contact_id = int(random_contact[0])
     old_contacts_in_group = db.get_contacts_in_group(random_group_db_id)
